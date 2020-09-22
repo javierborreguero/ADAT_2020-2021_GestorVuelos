@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 -- Base de datos: `adat_vuelos`
 --
 
+CREATE DATABASE IF NOT EXISTS adat_vuelos;
+USE adat_vuelos;
 -- --------------------------------------------------------
 
 --
