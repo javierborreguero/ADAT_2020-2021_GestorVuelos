@@ -14,6 +14,7 @@ import modelo.Vuelos;
  */
 public class Controlador {
 	public GestorAccesoDatos eligoModoAccesoDatos;
+	
 
 	public Controlador() {
 
@@ -22,6 +23,8 @@ public class Controlador {
 	public void elegirModoAccesoDatos(int acceso) {
 		if (acceso == 1) {
 			eligoModoAccesoDatos = new AccesoFichero();
+		} else if (acceso == 2) {
+			
 		}
 	}
 
