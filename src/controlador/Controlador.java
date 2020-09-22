@@ -3,6 +3,7 @@
  */
 package controlador;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -14,7 +15,6 @@ import modelo.Vuelos;
  */
 public class Controlador {
 	public GestorAccesoDatos eligoModoAccesoDatos;
-	
 
 	public Controlador() {
 
@@ -24,7 +24,7 @@ public class Controlador {
 		if (acceso == 1) {
 			eligoModoAccesoDatos = new AccesoFichero();
 		} else if (acceso == 2) {
-			
+			eligoModoAccesoDatos = new AccesoBaseDeDatos();
 		}
 	}
 

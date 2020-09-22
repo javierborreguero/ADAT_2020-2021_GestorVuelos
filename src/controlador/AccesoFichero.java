@@ -21,7 +21,7 @@ public class AccesoFichero implements GestorAccesoDatos {
 	BufferedReader br;
 
 	public AccesoFichero() {
-		System.out.println("ACCESO A DATOS - FICHEROS DE TEXTO");
+		System.out.println("<----- FICHEROS DE TEXTO ----->");
 
 	}
 

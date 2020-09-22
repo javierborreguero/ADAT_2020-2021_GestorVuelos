@@ -48,7 +48,10 @@ public class Inicio {
 				mControlador.elegirModoAccesoDatos(acceso);
 				menuElegirOpcion();
 				break;
-
+			case 2:
+				elegirModoAcceso = "Base de datos";
+				mControlador.elegirModoAccesoDatos(acceso);
+				menuElegirOpcion();
 			default:
 				break;
 			}
