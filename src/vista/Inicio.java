@@ -5,6 +5,7 @@ package vista;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import controlador.Controlador;
@@ -18,7 +19,7 @@ import modelo.Vuelos;
 public class Inicio {
 	private Scanner sc;
 	private Controlador mControlador;
-	private GestorAccesoDatos mGestorAccesoDatos;
+	
 
 	/**
 	 * @param args
@@ -45,8 +46,6 @@ public class Inicio {
 			case 1:
 				elegirModoAcceso = "Ficheros";
 				mControlador.elegirModoAccesoDatos(acceso);
-				// System.out.println("Enhorabuena, ahora podrás acceder a la información que
-				// contienens los ficheros");
 				menuElegirOpcion();
 				break;
 
@@ -83,6 +82,20 @@ public class Inicio {
 		int contador = 1;
 		if (mControlador.leerDatos() == null) {
 			System.out.println("No existe información de ningún vuelo");
+		} else {
+			for (Entry<String, Vuelos> entry : mControlador.leerDatos().entrySet()) {
+				System.out.println("<----- Vuelo " + contador + " ----->");
+				System.out.println("Id: " + entry.getValue().getId());
+				System.out.println("Codigo del vuelo: " + entry.getValue().getCodigo_vuelo());
+				System.out.println("Origen: " + entry.getValue().getOrigen());
+				System.out.println("Destino: " + entry.getValue().getDestino());
+				System.out.println("Hora: " + entry.getValue().getHora());
+				System.out.println("Fecha: " + entry.getValue().getFecha());
+				System.out.println("Numero de plazas totales: " + entry.getValue().getPlazas_totales());
+				System.out.println("Numero de plazas disponibles: " + entry.getValue().getPlazas_disponibles());
+				System.out.println("-----------------------\n");
+				contador++;
+			}
 		}
 	}
 
