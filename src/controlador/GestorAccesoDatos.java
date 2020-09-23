@@ -10,4 +10,6 @@ public interface GestorAccesoDatos {
 
 	public boolean insertarVuelo(Vuelos vuelos) throws IOException;
 
+	public boolean borrarDatos() throws IOException;
+
 }

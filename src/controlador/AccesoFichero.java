@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
 
@@ -67,8 +68,12 @@ public class AccesoFichero implements GestorAccesoDatos {
 			bw = new BufferedWriter(new FileWriter(infoVuelos));
 			bw.write(vuelos.getId() + ";" + vuelos.getCodigo_vuelo() + ";" + vuelos.getOrigen() + ";"
 					+ vuelos.getDestino() + ";" + vuelos.getHora() + ";" + vuelos.getFecha() + ";"
-					+ vuelos.getPlazas_totales() + ";" + vuelos.getPlazas_disponibles() + "\n" + "*" + "\n");
+					+ vuelos.getPlazas_totales() + ";" + vuelos.getPlazas_disponibles());
+			bw.write("\n");
+			bw.write("*");
+			bw.write("\n");
 			bw.close();
+
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -76,6 +81,16 @@ public class AccesoFichero implements GestorAccesoDatos {
 
 		return false;
 
+	}
+
+	@Override
+	public boolean borrarDatos() throws IOException {
+		// TODO Auto-generated method stub
+		infoVuelos = new File("Ficheros/datos/Vuelos.txt");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(infoVuelos));
+		bw.write("");
+		bw.close();
+		return true;
 	}
 
 }

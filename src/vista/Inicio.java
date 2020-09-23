@@ -63,7 +63,7 @@ public class Inicio {
 
 	private void menuElegirOpcion() {
 		// TODO Auto-generated method stub
-		System.out.println("¿Que quieres hacer?\n1. Leer\n2. Insertar");
+		System.out.println("¿Que quieres hacer?\n1. Leer\n2. Insertar\n3. Borrar");
 		int acceso = sc.nextInt();
 		switch (acceso) {
 		case 1:
@@ -82,7 +82,12 @@ public class Inicio {
 				e.printStackTrace();
 			}
 			break;
-
+		case 3:
+			try {
+				borrarVUelos();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		default:
 			break;
 		}
@@ -141,6 +146,14 @@ public class Inicio {
 		} else {
 			System.out.println("Se ha producido un error al guardar los datos");
 		}
+	}
+	private void borrarVUelos() throws IOException {
+		if (mControlador.borrarDatosVuelos()) {
+			System.out.println("Los datos han sido borrados correctamente");
+		} else {
+			System.out.println("No se han podido borrar los datos");
+		}
+		
 	}
 
 	public static void main(String[] args) {

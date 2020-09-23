@@ -73,4 +73,10 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 		return false;
 	}
 
+	@Override
+	public boolean borrarDatos() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
