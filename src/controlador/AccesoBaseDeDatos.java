@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,14 +39,32 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			System.exit(1);
+			System.exit(-1);
 		}
 	}
 
 	@Override
 	public HashMap<String, Vuelos> leerVuelos() throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Vuelos> verInfoVuelos = new HashMap<String, Vuelos>();
+		Vuelos mVuelos;
+		PreparedStatement pstm;
+		ResultSet rset;
+		try {
+			pstm = mConnection.prepareStatement("Select * from vuelos");
+			rset = pstm.executeQuery();
+			while (rset.next()) {
+				mVuelos = new Vuelos(Integer.parseInt(rset.getString("Id")), rset.getString("Codigo_Vuelo"),
+						rset.getString("Origen"), rset.getString("Destino"), rset.getString("Fecha"),
+						rset.getString("Hora"), Integer.parseInt(rset.getString("Plazas_totales")),
+						Integer.parseInt(rset.getString("PLazas_disponibles")));
+				verInfoVuelos.put(rset.getString("Id"), mVuelos);
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return verInfoVuelos;
 	}
 
 }
