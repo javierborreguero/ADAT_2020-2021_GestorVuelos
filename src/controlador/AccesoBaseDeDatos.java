@@ -67,4 +67,10 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 		return verInfoVuelos;
 	}
 
+	@Override
+	public boolean insertarVuelo(Vuelos vuelos) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -38,6 +38,19 @@ public class Vuelos {
 		this.plazas_disponibles = plazas_disponibles;
 	}
 
+	public Vuelos(String codigo_vuelo, String origen, String destino, String fecha, String hora, int plazas_totales,
+			int plazas_disponibles) {
+		super();
+		this.codigo_vuelo = codigo_vuelo;
+		this.origen = origen;
+		this.destino = destino;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.plazas_totales = plazas_totales;
+		this.plazas_disponibles = plazas_disponibles;
+
+	}
+
 	public int getId() {
 		return id;
 	}

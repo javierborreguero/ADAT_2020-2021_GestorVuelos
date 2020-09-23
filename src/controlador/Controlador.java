@@ -15,6 +15,7 @@ import modelo.Vuelos;
  */
 public class Controlador {
 	public GestorAccesoDatos eligoModoAccesoDatos;
+	HashMap<String, Vuelos> verInfoVuelos;
 
 	public Controlador() {
 
@@ -31,6 +32,16 @@ public class Controlador {
 	public HashMap<String, Vuelos> leerDatos() throws IOException {
 		HashMap<String, Vuelos> verInfoVuelos = eligoModoAccesoDatos.leerVuelos();
 		return verInfoVuelos;
+	}
+
+	public boolean insetarVuelo(Vuelos vuelos) {
+		try {
+			eligoModoAccesoDatos.insertarVuelo(vuelos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 }
