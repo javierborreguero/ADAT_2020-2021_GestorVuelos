@@ -11,11 +11,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Map.Entry;
 
 import com.mysql.cj.x.protobuf.MysqlxExpect.Open.Condition.Key;
 
 import modelo.Vuelos;
+import vista.Inicio;
 
 /**
  * @author Usr
@@ -23,6 +25,7 @@ import modelo.Vuelos;
  */
 public class AccesoFichero implements GestorAccesoDatos {
 	File infoVuelos;
+	Controlador mControlador;
 
 	public AccesoFichero() {
 		System.out.println("<----- FICHEROS DE TEXTO ----->");
@@ -92,5 +95,7 @@ public class AccesoFichero implements GestorAccesoDatos {
 		bw.close();
 		return true;
 	}
+
+
 
 }

@@ -19,7 +19,16 @@ import modelo.Vuelos;
 public class Inicio {
 	private Scanner sc;
 	private Controlador mControlador;
-	HashMap<String, Vuelos> mVuelos;
+	Vuelos mVuelos;
+	public String busqueda_ciudad_origen;
+
+	public String getBusqueda_ciudad_origen() {
+		return busqueda_ciudad_origen;
+	}
+
+	public void setBusqueda_ciudad_origen(String busqueda_ciudad_origen) {
+		this.busqueda_ciudad_origen = busqueda_ciudad_origen;
+	}
 
 	/**
 	 * @param args
@@ -32,6 +41,13 @@ public class Inicio {
 
 	public void run() {
 		menuAccesoDatos();
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Inicio mInicio = new Inicio();
+		mInicio.run();
 
 	}
 
@@ -63,7 +79,7 @@ public class Inicio {
 
 	private void menuElegirOpcion() {
 		// TODO Auto-generated method stub
-		System.out.println("¿Que quieres hacer?\n1. Leer\n2. Insertar\n3. Borrar");
+		System.out.println("¿Que quieres hacer?\n1. Leer vuelos\n2. Insertar un vuelo\n3. Borrar\n4. Buscar un vuelo");
 		int acceso = sc.nextInt();
 		switch (acceso) {
 		case 1:
@@ -88,12 +104,20 @@ public class Inicio {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+		case 4:
+			try {
+				buscarVuelo();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
 		default:
 			break;
 		}
 
 	}
 
+	/* ------------ LEER ------------ */
 	private void leerDatos() throws IOException {
 		int contador = 1;
 		if (mControlador.leerDatos() == null) {
@@ -115,6 +139,7 @@ public class Inicio {
 		}
 	}
 
+	/*------------ INSERTAR ------------*/
 	private void insertarDatos() throws IOException {
 		// TODO Auto-generated method stub
 		// boolean datosAlmacenados = mControlador.;
@@ -147,20 +172,45 @@ public class Inicio {
 			System.out.println("Se ha producido un error al guardar los datos");
 		}
 	}
+
+	/* ------------ BORRAR ------------ */
 	private void borrarVUelos() throws IOException {
 		if (mControlador.borrarDatosVuelos()) {
 			System.out.println("Los datos han sido borrados correctamente");
 		} else {
 			System.out.println("No se han podido borrar los datos");
 		}
-		
+
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Inicio mInicio = new Inicio();
-		mInicio.run();
+	/* ------------ BUSCAR ------------ */
+	public void buscarVuelo() throws IOException {
+		sc.nextLine();
+		int contador = 1;
+		System.out.println("Introduzca la ciudad de origen");
+		String introducir_ciudad_origen = sc.nextLine();
+		System.out.println("Introduzca la ciudad destino");
+		String introducir_ciudad_destino = sc.nextLine();
+		for (Entry<String, Vuelos> entry : mControlador.leerDatos().entrySet()) {
+			if (introducir_ciudad_origen.equalsIgnoreCase(entry.getValue().getOrigen())
+					&& introducir_ciudad_destino.equalsIgnoreCase(entry.getValue().getDestino())) {
+				System.out.println("<---- Resultado de la busqueda ----->\n" + "<----- Vuelo " + contador + " ----->");
+				System.out.println("Id: " + entry.getValue().getId());
+				System.out.println("Codigo del vuelo: " + entry.getValue().getCodigo_vuelo());
+				System.out.println("Origen: " + entry.getValue().getOrigen());
+				System.out.println("Destino: " + entry.getValue().getDestino());
+				System.out.println("Hora: " + entry.getValue().getHora());
+				System.out.println("Fecha: " + entry.getValue().getFecha());
+				System.out.println("Numero de plazas totales: " + entry.getValue().getPlazas_totales());
+				System.out.println("Numero de plazas disponibles: " + entry.getValue().getPlazas_disponibles());
+				contador++;
+				System.out.println("-----------------------\n");
+			}else {
+				System.out.println("No hemos encontrado la información que busca");
+			}
 
+		}
+		System.out.println("-----------------------\n");
 	}
 
 }

@@ -16,12 +16,13 @@ import modelo.Vuelos;
  */
 public class Controlador {
 	public GestorAccesoDatos eligoModoAccesoDatos;
-	HashMap<String, Vuelos> verInfoVuelos;
+	AccesoFichero mAccesoFichero;
 
 	public Controlador() {
 
 	}
 
+	/* ------------ ACCESO DATOS ------------ */
 	public void elegirModoAccesoDatos(int acceso) {
 		if (acceso == 1) {
 			eligoModoAccesoDatos = new AccesoFichero();
@@ -30,11 +31,13 @@ public class Controlador {
 		}
 	}
 
+	/* ------------ LEER ------------ */
 	public HashMap<String, Vuelos> leerDatos() throws IOException {
 		HashMap<String, Vuelos> verInfoVuelos = eligoModoAccesoDatos.leerVuelos();
 		return verInfoVuelos;
 	}
 
+	/* --------- INSERTAR ------------ */
 	public boolean insetarVuelo(Vuelos vuelos) {
 		try {
 			eligoModoAccesoDatos.insertarVuelo(vuelos);
@@ -52,6 +55,7 @@ public class Controlador {
 		}
 	}
 
+	/* ------------ BORRAR ------------ */
 	public boolean borrarDatosVuelos() {
 		// TODO Auto-generated method stub
 		try {
@@ -62,5 +66,7 @@ public class Controlador {
 		}
 		return true;
 	}
+
+
 
 }

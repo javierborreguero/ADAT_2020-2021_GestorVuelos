@@ -12,4 +12,6 @@ public interface GestorAccesoDatos {
 
 	public boolean borrarDatos() throws IOException;
 
+	
+
 }
