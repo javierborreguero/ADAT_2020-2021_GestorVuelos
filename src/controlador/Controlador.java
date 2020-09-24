@@ -67,6 +67,18 @@ public class Controlador {
 		return true;
 	}
 
+	/* ------------ MODIFICAR ------------ */
+	public boolean modificarVuelo(String modificar, Vuelos mVuelos) {
+		try {
+			if (eligoModoAccesoDatos.modificarVuelo(modificar, mVuelos)) {
+				return true;
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 
+	}
 
 }

@@ -96,6 +96,21 @@ public class AccesoFichero implements GestorAccesoDatos {
 		return true;
 	}
 
-
+	@Override
+	public boolean modificarVuelo(String modificar, Vuelos mVuelos) throws IOException {
+		// TODO Auto-generated method stub
+		HashMap<String, Vuelos> vueloModificar = leerVuelos();
+		boolean vueloHaSidoModificado = false;
+		for (Entry<String, Vuelos> entry : vueloModificar.entrySet()) {
+			if (entry.getKey().contains(modificar)) {
+				entry.setValue(mVuelos);
+				vueloHaSidoModificado = true;
+			}
+		}
+		if (vueloHaSidoModificado) {
+			mControlador.guardarDatosVuelo(vueloModificar);
+		}
+		return vueloHaSidoModificado;
+	}
 
 }

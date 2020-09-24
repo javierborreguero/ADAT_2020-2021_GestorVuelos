@@ -12,6 +12,6 @@ public interface GestorAccesoDatos {
 
 	public boolean borrarDatos() throws IOException;
 
-	
+	public boolean modificarVuelo(String modificar, Vuelos mVuelos) throws IOException;
 
 }

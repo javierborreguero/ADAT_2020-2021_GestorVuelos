@@ -79,5 +79,11 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 		return false;
 	}
 
+	@Override
+	public boolean modificarVuelo(String modificar, Vuelos mVuelos) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

@@ -20,15 +20,7 @@ public class Inicio {
 	private Scanner sc;
 	private Controlador mControlador;
 	Vuelos mVuelos;
-	public String busqueda_ciudad_origen;
-
-	public String getBusqueda_ciudad_origen() {
-		return busqueda_ciudad_origen;
-	}
-
-	public void setBusqueda_ciudad_origen(String busqueda_ciudad_origen) {
-		this.busqueda_ciudad_origen = busqueda_ciudad_origen;
-	}
+	private String modificar;
 
 	/**
 	 * @param args
@@ -79,7 +71,8 @@ public class Inicio {
 
 	private void menuElegirOpcion() {
 		// TODO Auto-generated method stub
-		System.out.println("¿Que quieres hacer?\n1. Leer vuelos\n2. Insertar un vuelo\n3. Borrar\n4. Buscar un vuelo");
+		System.out.println(
+				"¿Que quieres hacer?\n1. Leer vuelos\n2. Insertar un vuelo\n3. Borrar\n4. Buscar un vuelo\n5. Modificar los datos de un vuelo");
 		int acceso = sc.nextInt();
 		switch (acceso) {
 		case 1:
@@ -104,9 +97,18 @@ public class Inicio {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			break;
 		case 4:
 			try {
 				buscarVuelo();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
+		case 5:
+			try {
+				String modificar = null;
+				modificarVuelo();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -184,12 +186,14 @@ public class Inicio {
 	}
 
 	/* ------------ BUSCAR ------------ */
-	public void buscarVuelo() throws IOException {
+	private void buscarVuelo() throws IOException {
 		sc.nextLine();
 		int contador = 1;
-		System.out.println("Introduzca la ciudad de origen");
+		System.out.print(
+				"Introduzca la ciudad de origen " + " (esta información es necesaria para poder lozalizar el vuelo)");
 		String introducir_ciudad_origen = sc.nextLine();
-		System.out.println("Introduzca la ciudad destino");
+		System.out.print(
+				"Introduzca la ciudad destino " + " (esta información es necesaria para poder lozalizar el vuelo)");
 		String introducir_ciudad_destino = sc.nextLine();
 		for (Entry<String, Vuelos> entry : mControlador.leerDatos().entrySet()) {
 			if (introducir_ciudad_origen.equalsIgnoreCase(entry.getValue().getOrigen())
@@ -205,12 +209,48 @@ public class Inicio {
 				System.out.println("Numero de plazas disponibles: " + entry.getValue().getPlazas_disponibles());
 				contador++;
 				System.out.println("-----------------------\n");
-			}else {
-				System.out.println("No hemos encontrado la información que busca");
+
 			}
 
 		}
 		System.out.println("-----------------------\n");
+	}
+
+	/* ------------ MODIFICAR ------------ */
+	private void modificarVuelo() throws IOException {
+		sc.nextLine();
+		System.out.println("¿Estas seguro que quieres cambiar la información de un vuelo? Si/No");
+		String si_no = sc.nextLine();
+		if (si_no.equalsIgnoreCase("Si")) {
+			actualizarVuelo();
+		} else if (si_no.equalsIgnoreCase("No")) {
+			menuElegirOpcion();
+		}
+//		System.out.println("Para cambiar información de un vuelo en primer lugar");
+//		buscarVuelo();
+//		System.out.println("¿Cual es el nuevo punto de origen?");
+//		String nuevo_origen = sc.nextLine();
+//		System.out.println("¿CUal es el nuevo punto de destino?");
+//		String nuevo_destino = sc.nextLine();
+//		System.out.println("Si el vuelo se ha adelantado o retradado, indique el nuevo horario");
+//		String nuea_hora = sc.nextLine();
+//		System.out.println("?La fecha ha sufrido alguna modificación?");
+//		String nueva_fecha = sc.nextLine();
+//		System.out.println("Introduzca el cambio que se han producido en las plazas totales");
+//		String nuevas_plazas_totales = sc.nextLine();
+//		System.out.println("Introduzca el cambio que se han producido en las plazas disponibles");
+//		String nuevas_plazas_disponibles = sc.nextLine();
+//		Vuelos mVuelos = new Vuelos(nuevo_origen, nuevo_destino, nueva_fecha, nuea_hora,
+//				Integer.parseInt(nuevas_plazas_totales), Integer.parseInt(nuevas_plazas_disponibles));
+//		if (mControlador.modificarVuelo(modificar, mVuelos)) {
+//			System.out.println("La información ha sido actualizada");
+//		} else {
+//			System.out.println("Se ha producido un error al guardar los datos");
+//		}
+	}
+
+	private void actualizarVuelo() throws IOException {
+		System.out.println("Procederemos a actualizar el vuelo");
 	}
 
 }
