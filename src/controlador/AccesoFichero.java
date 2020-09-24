@@ -65,7 +65,7 @@ public class AccesoFichero implements GestorAccesoDatos {
 		infoVuelos = new File("Ficheros/datos/Vuelos.txt");
 		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter(infoVuelos));
+			bw = new BufferedWriter(new FileWriter(infoVuelos, true));
 			bw.write(vuelos.getId() + ";" + vuelos.getCodigo_vuelo() + ";" + vuelos.getOrigen() + ";"
 					+ vuelos.getDestino() + ";" + vuelos.getHora() + ";" + vuelos.getFecha() + ";"
 					+ vuelos.getPlazas_totales() + ";" + vuelos.getPlazas_disponibles());
