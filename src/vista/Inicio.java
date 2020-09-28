@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import controlador.Controlador;
 import controlador.GestorAccesoDatos;
@@ -219,38 +220,71 @@ public class Inicio {
 	/* ------------ MODIFICAR ------------ */
 	private void modificarVuelo() throws IOException {
 		sc.nextLine();
-		System.out.println("¿Estas seguro que quieres cambiar la información de un vuelo? Si/No");
-		String si_no = sc.nextLine();
-		if (si_no.equalsIgnoreCase("Si")) {
-			actualizarVuelo();
-		} else if (si_no.equalsIgnoreCase("No")) {
+		modificar = null;
+		System.out.println("¿Estas seguro que quieres cambiar la información de un vuelo?\1. Si\n2. No");
+		int si_no = sc.nextInt();
+		switch (si_no) {
+		case 1:
+			modificar = actualizarVuelo();
+			break;
+		case 2:
 			menuElegirOpcion();
+			break;
+		default:
+			break;
 		}
-//		System.out.println("Para cambiar información de un vuelo en primer lugar");
-//		buscarVuelo();
-//		System.out.println("¿Cual es el nuevo punto de origen?");
-//		String nuevo_origen = sc.nextLine();
-//		System.out.println("¿CUal es el nuevo punto de destino?");
-//		String nuevo_destino = sc.nextLine();
-//		System.out.println("Si el vuelo se ha adelantado o retradado, indique el nuevo horario");
-//		String nuea_hora = sc.nextLine();
-//		System.out.println("?La fecha ha sufrido alguna modificación?");
-//		String nueva_fecha = sc.nextLine();
-//		System.out.println("Introduzca el cambio que se han producido en las plazas totales");
-//		String nuevas_plazas_totales = sc.nextLine();
-//		System.out.println("Introduzca el cambio que se han producido en las plazas disponibles");
-//		String nuevas_plazas_disponibles = sc.nextLine();
-//		Vuelos mVuelos = new Vuelos(nuevo_origen, nuevo_destino, nueva_fecha, nuea_hora,
-//				Integer.parseInt(nuevas_plazas_totales), Integer.parseInt(nuevas_plazas_disponibles));
-//		if (mControlador.modificarVuelo(modificar, mVuelos)) {
-//			System.out.println("La información ha sido actualizada");
-//		} else {
-//			System.out.println("Se ha producido un error al guardar los datos");
-//		}
 	}
 
-	private void actualizarVuelo() throws IOException {
+	private String actualizarVuelo() throws IOException {
 		System.out.println("Procederemos a actualizar el vuelo");
+		System.out.println("En el fichero tenemos almacenado los siguientes vuelos: ");
+		for (Entry<String, Vuelos> entry : mControlador.leerDatos().entrySet()) {
+			System.out.println(entry.getValue().getId() + " " + entry.getValue().getOrigen() + " "
+					+ entry.getValue().getDestino());
+		}
+		System.out.println("Elige el vuelo que quieres modificar");
+		int seleccionarVuelo = sc.nextInt();
+		for (Entry<String, Vuelos> entry : mControlador.leerDatos().entrySet()) {
+			if (seleccionarVuelo == entry.getValue().getId()) {
+				System.out.println("Esta es la información del vuelo que has elegido");
+				System.out.println("<---- Resultado de la busqueda ----->\n");
+				System.out.println("Id: " + entry.getValue().getId());
+				System.out.println("Codigo del vuelo: " + entry.getValue().getCodigo_vuelo());
+				System.out.println("Origen: " + entry.getValue().getOrigen());
+				System.out.println("Destino: " + entry.getValue().getDestino());
+				System.out.println("Hora: " + entry.getValue().getHora());
+				System.out.println("Fecha: " + entry.getValue().getFecha());
+				System.out.println("Numero de plazas totales: " + entry.getValue().getPlazas_totales());
+				System.out.println("Numero de plazas disponibles: " + entry.getValue().getPlazas_disponibles());
+				System.out.println("-----------------------\n");
+
+				sc.nextLine();
+				System.out.println("¿Cual es el nuevo punto de origen?");
+				String nuevo_origen = sc.nextLine();
+				System.out.println("¿CUal es el nuevo punto de destino?");
+				String nuevo_destino = sc.nextLine();
+				System.out.println("Si el vuelo se ha adelantado o retradado, indique el nuevo horario");
+				String nuea_hora = sc.nextLine();
+				System.out.println("?La fecha ha sufrido alguna modificación?");
+				String nueva_fecha = sc.nextLine();
+				System.out.println("Introduzca el cambio que se han producido en las plazas totales");
+				String nuevas_plazas_totales = sc.nextLine();
+				System.out.println("Introduzca el cambio que se han producido en las plazas disponibles");
+				String nuevas_plazas_disponibles = sc.nextLine();
+				Vuelos vueloModificado = new Vuelos(Integer.parseInt(modificar), entry.getValue().getCodigo_vuelo(),
+						nuevo_origen, nuevo_destino, nueva_fecha, nuea_hora, Integer.parseInt(nuevas_plazas_totales),
+						Integer.parseInt(nuevas_plazas_disponibles));
+				if (mControlador.modificarVuelo(modificar, vueloModificado)) {
+					System.out.println("exito");
+				} else {
+					System.out.println("oooohhhh");
+				}
+			}
+
+		}
+
+		return modificar;
+
 	}
 
 }
