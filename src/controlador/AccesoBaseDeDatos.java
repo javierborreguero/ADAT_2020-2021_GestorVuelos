@@ -85,5 +85,17 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 		return false;
 	}
 
+	@Override
+	public void guardarDatosVuelo(HashMap<String, Vuelos> listaVuelos) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean comprobarIdVuelo(Vuelos vuelos) throws IOException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

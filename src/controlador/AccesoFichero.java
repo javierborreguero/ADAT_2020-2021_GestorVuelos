@@ -64,6 +64,17 @@ public class AccesoFichero implements GestorAccesoDatos {
 	}
 
 	@Override
+	public boolean comprobarIdVuelo(Vuelos vuelos) throws IOException {
+		HashMap<String, Vuelos> comprobarId = leerVuelos();
+		for (Entry<String, Vuelos> entry : comprobarId.entrySet()) {
+			if (entry.getValue().getId() == vuelos.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean insertarVuelo(Vuelos vuelos) throws IOException {
 		infoVuelos = new File("Ficheros/datos/Vuelos.txt");
 		BufferedWriter bw = null;
@@ -87,6 +98,16 @@ public class AccesoFichero implements GestorAccesoDatos {
 	}
 
 	@Override
+	public void guardarDatosVuelo(HashMap<String, Vuelos> listaVuelos) throws IOException {
+		// TODO Auto-generated method stub
+		borrarDatos();
+		for (Entry<String, Vuelos> entry : listaVuelos.entrySet()) {
+			insertarVuelo(listaVuelos.get(entry.getKey()));
+		}
+
+	}
+
+	@Override
 	public boolean borrarDatos() throws IOException {
 		// TODO Auto-generated method stub
 		infoVuelos = new File("Ficheros/datos/Vuelos.txt");
@@ -102,13 +123,14 @@ public class AccesoFichero implements GestorAccesoDatos {
 		HashMap<String, Vuelos> vueloModificar = leerVuelos();
 		boolean vueloHaSidoModificado = false;
 		for (Entry<String, Vuelos> entry : vueloModificar.entrySet()) {
-			if (entry.getKey().contains(modificar)) {
+			if (entry.getKey().equals(modificar)) {
 				entry.setValue(mVuelos);
 				vueloHaSidoModificado = true;
+				// insertarVuelo(vueloModificar);
 			}
 		}
 		if (vueloHaSidoModificado) {
-			mControlador.guardarDatosVuelo(vueloModificar);
+			guardarDatosVuelo(vueloModificar);
 		}
 		return vueloHaSidoModificado;
 	}

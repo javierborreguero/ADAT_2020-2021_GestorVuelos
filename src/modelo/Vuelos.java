@@ -51,11 +51,21 @@ public class Vuelos {
 
 	}
 
-	public Vuelos(String origen, String destino, String fecha, String hora, int plazas_totales,
+	public Vuelos(int id, String origen, String destino, String fecha, String hora, int plazas_totales,
 			int plazas_disponibles) {
 		super();
+		this.id = id;
 		this.origen = origen;
 		this.destino = destino;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.plazas_totales = plazas_totales;
+		this.plazas_disponibles = plazas_disponibles;
+	}
+
+	public Vuelos(int id, String fecha, String hora, int plazas_totales, int plazas_disponibles) {
+		super();
+		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.plazas_totales = plazas_totales;
