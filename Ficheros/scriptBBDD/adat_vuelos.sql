@@ -31,14 +31,30 @@ USE adat_vuelos;
 
 CREATE TABLE `vuelos` (
   `Id` int(11) NOT NULL,
-  `Codigo_vuelo` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Codigo_vuelo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Origen` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Destino` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `Fecha` date DEFAULT NULL,
+  `Fecha` varchar(50) DEFAULT NULL,
   `Hora` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL,
   `Plazas_totales` int(11) DEFAULT NULL,
   `Plazas_disponibles` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Indices de la tabla `vuelos`
+--
+ALTER TABLE `vuelos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `vuelos`
+--
+ALTER TABLE `vuelos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -3,6 +3,7 @@
  */
 package controlador;
 
+import java.awt.geom.QuadCurve2D;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import modelo.Vuelos;
@@ -69,7 +71,25 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 
 	@Override
 	public boolean insertarVuelo(Vuelos vuelos) throws IOException {
-		// TODO Auto-generated method stub
+		try {
+
+			PreparedStatement pstm = mConnection.prepareStatement(
+					"INSERT INTO vuelos (Id, Codigo_vuelo, Origen, Destino, Fecha, Hora, Plazas_totales, Plazas_disponibles) VALUES (?, ?, ?, ?, ?,?,?,?)");
+
+			pstm.setLong(1, vuelos.getId());
+			pstm.setString(2, vuelos.getCodigo_vuelo());
+			pstm.setString(3, vuelos.getOrigen());
+			pstm.setString(4, vuelos.getDestino());
+			pstm.setString(5, vuelos.getFecha());
+			pstm.setString(6, vuelos.getHora());
+			pstm.setLong(7, vuelos.getPlazas_totales());
+			pstm.setLong(8, vuelos.getPlazas_disponibles());
+			pstm.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -88,7 +108,7 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 	@Override
 	public void guardarDatosVuelo(HashMap<String, Vuelos> listaVuelos) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -96,6 +116,5 @@ public class AccesoBaseDeDatos implements GestorAccesoDatos {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 }
